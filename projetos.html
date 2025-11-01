@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Projetos — Secretaria de Juventude e Impacto Social</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --roxo: #6C3DD1;
+      --amarelo: #FFD84D;
+      --texto: #222;
+      --cinza: #777;
+      --branco: #fff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: var(--branco);
+      color: var(--texto);
+    }
+
+    /* ===== CABEÇALHO ===== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--branco);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      z-index: 10;
+    }
+
+    .navbar {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 25px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-area img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-family: "Poppins", sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--roxo);
+      line-height: 1.2;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--cinza);
+      font-weight: 500;
+    }
+
+    nav a:hover { color: var(--roxo); }
+
+    .btn-menu {
+      background: var(--amarelo);
+      color: var(--texto);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    /* ===== MENU HAMBÚRGUER ===== */
+    .hamburger { display: none; flex-direction: column; cursor: pointer; }
+    .hamburger div { width: 25px; height: 3px; background: var(--roxo); margin: 4px 0; transition: 0.3s; }
+
+    @media (max-width: 800px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        background: var(--branco);
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        width: 200px;
+        text-align: right;
+        padding: 10px 0;
+      }
+
+      nav a { display: block; padding: 10px 20px; }
+      .hamburger { display: flex; }
+      nav.active { display: flex; }
+    }
+
+    /* ===== CONTEÚDO PRINCIPAL ===== */
+    main {
+      max-width: 1100px;
+      margin: 110px auto 60px;
+      padding: 0 25px;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: "Poppins", sans-serif;
+      color: var(--roxo);
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+    }
+
+    p.intro {
+      color: var(--cinza);
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    /* ===== CARDS DE PROJETOS ===== */
+    .projetos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: #f8f6ff;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      padding: 20px;
+      text-align: left;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      color: var(--roxo);
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--cinza);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    .card a {
+      background: var(--roxo);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-block;
+    }
+
+    .card a:hover { background: #5428ad; }
+
+    /* ===== RODAPÉ ===== */
+    footer {
+      background: var(--roxo);
+      color: white;
+      text-align: center;
+      padding: 25px 10px;
+      font-size: 0.9rem;
+      margin-top: 70px;
+    }
+
+    footer a {
+      color: var(--amarelo);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+  </style>
+</head>
+<body>
+
+  <!-- ===== CABEÇALHO ===== -->
+  <header>
+    <div class="navbar">
+      <div class="logo-area">
+        <img src="https://files.catbox.moe/h7e5h3.png" alt="Logo da Secretaria">
+        <div class="logo-text">Secretaria de<br>Juventude e Impacto Social</div>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <div></div><div></div><div></div>
+      </div>
+
+      <nav id="nav">
+        <a href="index.html">Início</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="eventos.html">Eventos</a>
+        <a href="participar.html">Participar</a>
+        <a href="galeria.html">Galeria</a>
+        <a href="contato.html" class="btn-menu">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== CONTEÚDO ===== -->
+  <main>
+    <h1>Nossos Projetos</h1>
+    <p class="intro">
+      A Secretaria de Juventude e Impacto Social promove programas e iniciativas voltadas à formação, engajamento e impacto positivo da juventude nas comunidades. Conheça alguns de nossos projetos:
+    </p>
+
+    <div class="projetos-grid">
+      <div class="card">
+        <h2>1. Jovens Criadores</h2>
+        <p>Programa que incentiva a criatividade e o empreendedorismo social entre jovens, com oficinas, mentorias e desafios inovadores.</p>
+        <a href="#">Saiba mais</a>
+      </div>
+
+      <div class="card">
+        <h2>2. Vozes da Juventude</h2>
+        <p>Espaço de diálogo e escuta ativa com jovens de diferentes regiões, promovendo debates e políticas públicas participativas.</p>
+        <a href="#">Saiba mais</a>
+      </div>
+
+      <div class="card">
+        <h2>3. Impacto na Escola</h2>
+        <p>Projeto de extensão educativa que conecta estudantes e escolas em ações de transformação social local.</p>
+        <a href="#">Saiba mais</a>
+      </div>
+
+      <div class="card">
+        <h2>4. Festival de Ideias</h2>
+        <p>Evento anual que reúne jovens talentos, startups e projetos comunitários para apresentar soluções criativas e sustentáveis.</p>
+        <a href="#">Saiba mais</a>
+      </div>
+
+      <div class="card">
+        <h2>5. Liderança Jovem</h2>
+        <p>Programa de formação que desenvolve competências de liderança, empatia e cidadania ativa entre jovens participantes.</p>
+        <a href="#">Saiba mais</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== RODAPÉ ===== -->
+  <footer>
+    <p>© 2025 Secretaria de Juventude e Impacto Social — <a href="#">Instituto Imaginário</a></p>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    hamburger.addEventListener('click', () => nav.classList.toggle('active'));
+  </script>
+</body>
+</html>
