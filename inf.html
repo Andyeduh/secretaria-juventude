@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O que você pode fazer - te Secretaria de Juventude e Impacto Social</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Menu de navegação */
+    nav.main-nav {
+      background-color: #004a99;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 15px 0;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .nav-link.active, .nav-link:hover {
+      background-color: #0066cc;
+      color: #fff;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(to right, #0066cc, #004a99);
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    header h1 {
+      font-size: 2.2em;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2em;
+    }
+
+    /* Conteúdo principal */
+    main {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #004a99;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #0066cc;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    ul.services {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    ul.services li {
+      flex: 1 1 250px;
+      background-color: #e6f0ff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.3s;
+    }
+
+    ul.services li:hover {
+      transform: translateY(-5px);
+    }
+
+    ul.services li i {
+      font-size: 1.8em;
+      color: #004a99;
+    }
+
+    .contact, .links {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #e6f0ff;
+      border-left: 5px solid #0066cc;
+      border-radius: 8px;
+    }
+
+    .contact a, .links a {
+      color: #004a99;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact a:hover, .links a:hover {
+      text-decoration: underline;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 10px;
+      background-color: #0066cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 700;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #004a99;
+    }
+
+    /* Responsividade */
+    @media(max-width: 768px) {
+      ul.services {
+        flex-direction: column;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Menu de navegação -->
+<nav class="main-nav wrap" aria-label="Navegação principal">
+  <div class="nav-links" role="menubar" id="main-links">
+    <a href="index.html" class="nav-link active">Início</a>
+    <a href="sobre.html" class="nav-link">Sobre</a>
+    <a href="contato.html" class="nav-link">Contato</a>
+    <a href="transparencia.html" class="nav-link">Transparência</a>
+    <a href="mapa.html" class="nav-link">Mapa do Site</a>
+  </div>
+</nav>
+
+<header>
+  <h1>Secretaria de Juventude e Impacto Social</h1>
+  <p>O que você pode fazer ao visitar a nossa secretaria</p>
+</header>
+
+<main>
+  <section>
+    <h2>Serviços Disponíveis</h2>
+    <ul class="services">
+      <li><i class="fas fa-info-circle"></i> Solicitar informações e orientações sobre programas sociais</li>
+      <li><i class="fas fa-chalkboard-teacher"></i> Participar de cursos, oficinas e eventos culturais</li>
+      <li><i class="fas fa-file-signature"></i> Realizar inscrições em programas de capacitação</li>
+      <li><i class="fas fa-comment-dots"></i> Enviar denúncias, sugestões ou reclamações</li>
+      <li><i class="fas fa-handshake"></i> Solicitar convênios ou parcerias (empresas ou ONGs)</li>
+      <li><i class="fas fa-gavel"></i> Acompanhar editais, licitações e oportunidades de financiamento</li>
+    </ul>
+  </section>
+
+  <section class="contact">
+  
+  <section class="links">
+    <h2>Links Úteis</h2>
+    <a href=Edital.html class="btn" target="_blank"><i class="fas fa-file-pdf"></i> Editais e Licitações</a>
+    <a href=transparencia.html class="btn" target="_blank"><i class="fas fa-eye"></i> Transparência e Prestação de Contas</a>
+    <a href="[Link dos programas sociais]" class="btn" target="_blank"><i class="fas fa-hands-helping"></i> Programas Sociais Ativos</a>
+  </section>
+</main>
+
+</body>
+</html>

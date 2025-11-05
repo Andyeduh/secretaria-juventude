@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mapa do Site — SJIS</title>
+  <meta name="description" content="Mapa do site da Secretaria de Juventude e Impacto Social (SJIS)." />
+  <style>
+    :root{--azul-escuro:#0b4f88;--max-width:900px}
+    *{box-sizing:border-box}body{font-family:Segoe UI, Roboto, Arial, sans-serif;margin:0;background:#fbfdff;color:#122028}
+    .wrap{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+    header{padding:16px 0;border-bottom:1px solid rgba(6,40,70,0.06)}
+    nav a{margin-right:8px;text-decoration:none;color:var(--azul-escuro);font-weight:600}
+    main{padding:28px 0}
+    .list{background:white;padding:18px;border-radius:8px;border:1px solid rgba(6,40,70,0.04)}
+    footer{padding:18px 0;border-top:1px solid rgba(6,40,70,0.03);background:linear-gradient(180deg,#f7fbff,#f1f6fb)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="https://files.catbox.moe/23ml4h.jpeg" alt="Brasão" style="height:64px"/>
+        <img src="https://files.catbox.moe/1a8on0.png" alt="Logo" style="height:64px"/>
+      </div>
+      <h1>Mapa do Site</h1>
+      <nav><a href="index.html">Início</a> | <a href="sobre.html">Sobre</a> | <a href="contato.html">Contato</a></nav>
+    </header>
+
+    <main>
+      <section class="list">
+        <h2>Links principais</h2>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="mapa.html">Mapa do Site</a></li>
+        </ul>
+
+        <h3 style="margin-top:12px">Seções internas</h3>
+        <ul>
+          <li>Missão</li>
+          <li>Visão</li>
+          <li>Valores</li>
+          <li>Projetos</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+        <div>SJIS — Secretaria de Juventude e Impacto Social</div>
+        <div><img src="https://files.catbox.moe/23ml4h.jpeg" alt="Brasão" style="height:72px"/></div>
+      </div>
+      <div style="margin-top:8px;font-size:0.9rem;color:#6b7f87"></div>
+    </footer>
+  </div>
+</body>
+<script>
+  document.getElementById('search-btn').addEventListener('click', function() {
+    const termo = document.getElementById('site-search').value.trim();
+    if (termo) {
+      window.location.href = 'busca.html?q=' + encodeURIComponent(termo);
+    }
+  });
+
+  document.getElementById('site-search').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      document.getElementById('search-btn').click();
+    }
+  });
+</script>
+</html>

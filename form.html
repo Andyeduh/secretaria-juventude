@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitação de Informações - Secretaria de Juventude e Impacto Social</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Roboto', Arial, sans-serif; background-color: #f5f5f5; color: #333; line-height: 1.6; }
+
+    nav.main-nav { background-color: #004a99; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    .nav-links { display: flex; justify-content: center; flex-wrap: wrap; padding: 15px 0; }
+    .nav-link { color: white; text-decoration: none; margin: 0 15px; font-weight: 700; padding: 5px 10px; border-radius: 5px; transition: background 0.3s, color 0.3s; }
+    .nav-link.active, .nav-link:hover { background-color: #0066cc; color: #fff; }
+
+    header { background: linear-gradient(to right, #0066cc, #004a99); color: white; text-align: center; padding: 40px 20px; }
+    header h1 { font-size: 2.2em; margin-bottom: 10px; }
+    header p { font-size: 1.2em; }
+
+    main { max-width: 900px; margin: 30px auto; padding: 20px; background-color: white; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+
+    h2 { color: #004a99; margin-bottom: 15px; border-bottom: 2px solid #0066cc; display: inline-block; padding-bottom: 5px; }
+
+    form label { display: block; margin-top: 15px; font-weight: 600; }
+    form input, form textarea { width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; font-size: 1em; }
+    form input.invalid { border-color: red; }
+    form input.valid { border-color: green; }
+    form textarea { resize: vertical; }
+
+    .btn { display: inline-block; padding: 10px 20px; margin-top: 20px; background-color: #0066cc; color: white; border: none; border-radius: 5px; font-weight: 700; cursor: pointer; transition: background 0.3s; }
+    .btn:hover { background-color: #004a99; }
+
+    @media(max-width: 768px) { .nav-links { flex-direction: column; } }
+  </style>
+</head>
+<body>
+
+<nav class="main-nav wrap" aria-label="Navegação principal">
+  <div class="nav-links" role="menubar" id="main-links">
+    <a href="index.html" class="nav-link">Início</a>
+    <a href="sobre.html" class="nav-link">Sobre</a>
+    <a href="contato.html" class="nav-link">Contato</a>
+    <a href="transparencia.html" class="nav-link">Transparência</a>
+    <a href="formulario.html" class="nav-link active">Solicitar Informação</a>
+    <a href="mapa.html" class="nav-link">Mapa do Site</a>
+  </div>
+</nav>
+
+<header>
+  <h1>Solicitação de Informações Públicas</h1>
+  <p>Preencha o formulário abaixo para requisitar informações à Secretaria de Juventude e Impacto Social.</p>
+</header>
+
+<main>
+  <section class="formulario-info">
+    <h2>Formulário de Requisição</h2>
+    <form id="discordForm">
+      <label for="nome">Nome completo *</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="cpf">CPF *</label>
+      <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+
+      <label for="email">E-mail *</label>
+      <input type="email" id="email" name="email" placeholder="exemplo@dominio.com" required>
+
+      <label for="telefone">Telefone</label>
+      <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000">
+
+      <label for="assunto">Assunto *</label>
+      <input type="text" id="assunto" name="assunto" required>
+
+      <label for="descricao">Descrição da Informação *</label>
+      <textarea id="descricao" name="descricao" rows="6" required></textarea>
+
+      <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Enviar Solicitação</button>
+    </form>
+  </section>
+</main>
+
+<script>
+  const webhookURL = "SEU_WEBHOOK_URL_AQUI";
+
+  // Máscara de CPF
+  const cpfInput = document.getElementById('cpf');
+  cpfInput.addEventListener('input', function() {
+    let value = cpfInput.value.replace(/\D/g, '');
+    if (value.length > 11) value = value.slice(0, 11);
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    cpfInput.value = value;
+  });
+
+  // Máscara de Telefone
+  const telInput = document.getElementById('telefone');
+  telInput.addEventListener('input', function() {
+    let value = telInput.value.replace(/\D/g, '');
+    if (value.length > 11) value = value.slice(0, 11);
+    if (value.length > 10) {
+      value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+    } else if (value.length > 5) {
+      value = value.replace(/^(\d{2})(\d{4})(\d{0,4})$/, '($1) $2-$3');
+    } else if (value.length > 2) {
+      value = value.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+    } else {
+      value = value.replace(/^(\d*)/, '($1');
+    }
+    telInput.value = value;
+  });
+
+  // Validação de e-mail
+  const emailInput = document.getElementById('email');
+  emailInput.addEventListener('input', function() {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailInput.value === '') {
+      emailInput.classList.remove('valid', 'invalid');
+    } else if (pattern.test(emailInput.value)) {
+      emailInput.classList.add('valid');
+      emailInput.classList.remove('invalid');
+    } else {
+      emailInput.classList.add('invalid');
+      emailInput.classList.remove('valid');
+    }
+  });
+
+  // Envio para Discord
+  const form = document.getElementById("discordForm");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Verifica se email é válido
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+    if (!emailValido) {
+      alert("Por favor, insira um e-mail válido.");
+      emailInput.focus();
+      return;
+    }
+
+    const nome = document.getElementById("nome").value;
+    const cpf = document.getElementById("cpf").value;
+    const email = emailInput.value;
+    const telefone = document.getElementById("telefone").value;
+    const assunto = document.getElementById("assunto").value;
+    const descricao = document.getElementById("descricao").value;
+
+    const payload = {
+      content: `**Nova solicitação de informação pública**\n**Nome:** ${nome}\n**CPF:** ${cpf}\n**Email:** ${email}\n**Telefone:** ${telefone}\n**Assunto:** ${assunto}\n**Descrição:** ${descricao}`
+    };
+
+    try {
+      const response = await fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        alert("Solicitação enviada com sucesso!");
+        form.reset();
+        emailInput.classList.remove('valid','invalid');
+      } else {
+        alert("Erro ao enviar. Tente novamente.");
+      }
+    } catch (error) {
+      console.error("Erro:", error);
+      alert("Erro ao enviar. Tente novamente.");
+    }
+  });
+</script>
+
+</body>
+</html>

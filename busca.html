@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultados da Busca — SJIS</title>
+  <meta name="description" content="Resultados de pesquisa do site da Secretaria de Juventude e Impacto Social do Governo de Roraima.">
+  <style>
+    :root { --azul: #1773c0; --verde: #2c9a6f; --cinza: #f5f8fa; --max-width: 1000px; }
+    * { box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Roboto, Arial, sans-serif; background: var(--cinza); color: #122028; margin: 0; }
+    header { background: linear-gradient(90deg, var(--azul), var(--verde)); color: white; padding: 15px; text-align: center; }
+    header .brand { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:8px; }
+    header img { height:70px; }
+    nav { margin-top:10px; }
+    nav a { color:white; text-decoration:none; margin:0 10px; font-weight:600; }
+    main { max-width: var(--max-width); margin: 30px auto; background: white; border-radius: 10px; padding: 25px; box-shadow: 0 0 12px rgba(0,0,0,0.05); }
+    h1 { text-align:center; color:var(--azul); margin-top:0; }
+    h2 { color:var(--verde); margin-top:20px; }
+    .result { border:1px solid #d8e6ef; border-radius:8px; background:#fff; padding:15px; margin:10px 0; }
+    .result a { font-weight:bold; color:var(--azul); text-decoration:none; }
+    .result a:hover { text-decoration:underline; }
+    .note { color:#556b73; font-size:0.9rem; margin-top:15px; }
+    footer { background:#eaf2f7; padding:15px 0; text-align:center; border-top:2px solid var(--azul); margin-top:40px; }
+    footer img { height:60px; margin:10px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="https://files.catbox.moe/23ml4h.jpeg" alt="Brasão do Governo de Roraima">
+      <img src="https://files.catbox.moe/1a8on0.png" alt="Logo da SJIS">
+    </div>
+    <h1>Secretaria de Juventude e Impacto Social</h1>
+    <p>Governo do Estado de Roraima</p>
+    <nav>
+      <a href="index.html">Início</a> |
+      <a href="sobre.html">Sobre</a> |
+      <a href="contato.html">Contato</a> |
+      <a href="transparencia.html">Transparência</a> |
+      <a href="mapa.html">Mapa do Site</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Resultados da Busca</h1>
+    <div id="resultados">Carregando resultados...</div>
+  </main>
+
+  <footer>
+    <img src="https://files.catbox.moe/23ml4h.jpeg" alt="Brasão">
+    <div>SJIS — Secretaria de Juventude e Impacto Social<br>Governo do Estado de Roraima</div>
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const termo = params.get('q');
+    const resultadosDiv = document.getElementById('resultados');
+
+    const paginas = [
+      { titulo: "Início", url: "index.html" },
+      { titulo: "Sobre", url: "sobre.html" },
+      { titulo: "Contato", url: "contato.html" },
+      { titulo: "Transparência", url: "transparencia.html" },
+      { titulo: "Mapa do Site", url: "mapa.html" }
+    ];
+
+    async function buscar() {
+      if (!termo) {
+        resultadosDiv.innerHTML = "<p>Digite algo para pesquisar.</p>";
+        return;
+      }
+
+      resultadosDiv.innerHTML = `<p>Buscando por: <strong>${termo}</strong>...</p>`;
+
+      let encontrados = [];
+      for (const p of paginas) {
+        try {
+          const res = await fetch(p.url, {cache: "no-store"});
+          const texto = await res.text();
+          if (texto.toLowerCase().includes(termo.toLowerCase())) {
+            const index = texto.toLowerCase().indexOf(termo.toLowerCase());
+            const trecho = texto.substring(Math.max(0, index - 60), index + 120).replace(/<[^>]*>?/gm, '');
+            // destaque simples
+            const destaque = trecho.replace(new RegExp(termo, 'ig'), match => `<strong style="background:yellow;color:#000">${match}</strong>`);
+            encontrados.push({ titulo: p.titulo, url: p.url, trecho: destaque });
+          }
+        } catch (e) {
+          console.error("Erro ao buscar em:", p.url, e);
+        }
+      }
+
+      if (encontrados.length === 0) {
+        resultadosDiv.innerHTML = `<p>Nenhum resultado encontrado para "<strong>${termo}</strong>".</p>`;
+      } else {
+        resultadosDiv.innerHTML =
+          `<h2>Resultados para "${termo}":</h2>` +
+          encontrados.map(r => `
+            <div class="result">
+              <a href="${r.url}">${r.titulo}</a>
+              <p>${r.trecho}...</p>
+            </div>`).join('');
+      }
+    }
+
+    buscar();
+  </script>
+</body>
+</html>

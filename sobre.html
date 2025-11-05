@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sobre — SJIS</title>
+  <meta name="description" content="Sobre a Secretaria de Juventude e Impacto Social (SJIS) — missão, visão e valores." />
+  <style>
+    :root{--azul-escuro:#0b4f88;--azul:#1773c0;--verde:#2c9a6f;--max-width:1100px}
+    *{box-sizing:border-box}body{font-family:Segoe UI, Roboto, Arial, sans-serif;margin:0;background:#fbfdff;color:#122028}
+    .wrap{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+    header{padding:16px 0;border-bottom:1px solid rgba(6,40,70,0.06)}
+    .brand{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+    .brand img{height:64px}
+    nav{margin-top:8px}
+    nav a{margin-right:8px;text-decoration:none;color:var(--azul-escuro);font-weight:600}
+    main{padding:28px 0}
+    .card{background:white;padding:18px;border-radius:8px;border:1px solid rgba(6,40,70,0.04)}
+    footer{padding:18px 0;border-top:1px solid rgba(6,40,70,0.03);background:linear-gradient(180deg,#f7fbff,#f1f6fb)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img src="https://files.catbox.moe/23ml4h.jpeg" alt="Brasão" />
+        <img src="https://files.catbox.moe/1a8on0.png" alt="Logo" />
+      </div>
+      <h1>Sobre a Secretaria de Juventude e Impacto Social</h1>
+      <p class="muted">Institucional — Roraima</p>
+      <nav>
+        <a href="index.html">Início</a> | <a href="contato.html">Contato</a> | <a href="transparencia.html">Transparência</a> | <a href="mapa.html">Mapa do Site</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Missão</h2>
+        <p>Desenvolver, coordenar e executar políticas públicas voltadas à promoção, valorização e inclusão da juventude roraimense.</p>
+      </section>
+
+      <section class="card" style="margin-top:14px">
+        <h2>Visão</h2>
+        <p>Ser referência regional em promoção de políticas públicas que garantam oportunidades reais para a juventude.</p>
+      </section>
+
+      <section class="card" style="margin-top:14px">
+        <h2>Valores</h2>
+        <ul>
+          <li>Transparência</li>
+          <li>Respeito</li>
+          <li>Inclusão</li>
+          <li>Inovação</li>
+          <li>Participação social</li>
+        </ul>
+      </section>
+
+      <section class="card" style="margin-top:14px">
+        <h2>Equipe</h2>
+        <p>Informações sobre a equipe podem ser adicionadas aqui (diretorias, contatos internos e chamadas públicas).</p>
+        <p><strong>Fundador:</strong> Andrey</p>
+      </section>
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+        <div>SJIS — Secretaria de Juventude e Impacto Social</div>
+        <div><img src="https://files.catbox.moe/23ml4h.jpeg" alt="Brasão" style="height:72px"/></div>
+      </div>
+      <div style="margin-top:8px;font-size:0.9rem;color:#6b7f87">Verifique autorizações para uso de marcas e brasões oficiais.</div>
+    </footer>
+  </div>
+
+  <script>
+    // search redirect (header search uses site-search if present)
+    (function(){
+      const btn = document.getElementById('search-btn');
+      const input = document.getElementById('site-search');
+      if(btn && input){
+        btn.addEventListener('click', function(){
+          const termo = input.value.trim();
+          if(termo) window.location.href = 'busca.html?q=' + encodeURIComponent(termo);
+        });
+        input.addEventListener('keypress', function(e){ if(e.key==='Enter'){ e.preventDefault(); btn.click(); }});
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contato — SJIS</title>
+  <meta name="description" content="Fale com a Secretaria de Juventude e Impacto Social (SJIS)." />
+  <style>
+    :root{--azul:#1773c0;--verde:#2c9a6f;--max-width:900px}
+    *{box-sizing:border-box}
+    body{font-family:Segoe UI, Roboto, Arial, sans-serif;margin:0;background:#fbfdff;color:#122028}
+    .wrap{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+    header{padding:16px 0;border-bottom:1px solid rgba(6,40,70,0.06)}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{height:64px}
+    main{padding:28px 0}
+    form{display:flex;flex-direction:column;gap:10px;background:white;padding:18px;border-radius:8px;border:1px solid rgba(6,40,70,0.04)}
+    input,textarea{padding:10px;border-radius:6px;border:1px solid #d8e6ef}
+    button{background:var(--verde);color:white;padding:10px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
+    footer{padding:18px 0;border-top:1px solid rgba(6,40,70,0.03);background:linear-gradient(180deg,#f7fbff,#f1f6fb)}
+    .note{font-size:0.9rem;color:#556b73}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img src="https://files.catbox.moe/23ml4h.jpeg" alt="Brasão" />
+        <img src="https://files.catbox.moe/1a8on0.png" alt="Logo" />
+      </div>
+      <h1>Contato</h1>
+      <nav><a href="index.html">Início</a> | <a href="sobre.html">Sobre</a> | <a href="transparencia.html">Transparência</a> | <a href="mapa.html">Mapa do Site</a></nav>
+    </header>
+
+    <main>
+      <section>
+        <form id="contactForm" onsubmit="submitForm(event)">
+          <label for="nome">Nome</label>
+          <input id="nome" name="nome" type="text" required>
+
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" required>
+
+          <label for="assunto">Assunto</label>
+          <input id="assunto" name="assunto" type="text" required>
+
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="6" required></textarea>
+
+          <button type="submit">Enviar</button>
+          <div id="status" class="note"></div>
+        </form>
+
+        <p style="margin-top:12px" class="note">Alternativa: envie um e-mail para <strong>Acarvalhoaraujo714@gmail.com</strong></p>
+      </section>
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+        <div>SJIS — Secretaria de Juventude e Impacto Social</div>
+        <div><img src="https://files.catbox.moe/23ml4h.jpeg" alt="Brasão" style="height:72px"/></div>
+      </div>
+      <div style="margin-top:8px;font-size:0.9rem;color:#6b7f87"></div>
+    </footer>
+  </div>
+
+  <script>
+    // webhook URL (já preenchida com a que você forneceu)
+    const DISCORD_WEBHOOK = "https://discord.com/api/v10/webhooks/1434263602356818005/7Ggw9SmyXVySvaMIQM8OICvLi9mWwpIkh4CWAFgvGEO_cXMsdaHxBlX9QZqDV85JnIBZ";
+
+    async function submitForm(e){
+      e.preventDefault();
+      const status = document.getElementById('status');
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const assunto = document.getElementById('assunto').value.trim();
+      const mensagem = document.getElementById('mensagem').value.trim();
+
+      if(!nome || !email || !assunto || !mensagem){
+        status.textContent = 'Preencha todos os campos.';
+        status.style.color = '#a33';
+        return;
+      }
+
+      status.style.color = '#23495f';
+      status.textContent = 'Enviando...';
+
+      const payload = {
+        content: `📩 **Nova mensagem de contato (SJIS)**\n\n👤 **Nome:** ${nome}\n📧 **E-mail:** ${email}\n📝 **Assunto:** ${assunto}\n💬 **Mensagem:** ${mensagem}`
+      };
+
+      try {
+        const response = await fetch(DISCORD_WEBHOOK, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if(response.ok){
+          status.style.color = '#0a6f44';
+          status.textContent = 'Mensagem enviada com sucesso!';
+          e.target.reset();
+        } else {
+          status.style.color = '#a33';
+          status.textContent = 'Erro ao enviar. Tente novamente.';
+        }
+      } catch (error) {
+        status.style.color = '#a33';
+        status.textContent = 'Erro de conexão. Verifique sua internet.';
+      }
+    }
+
+    // search redirect from header
+    (function(){
+      const btn = document.getElementById('search-btn');
+      const input = document.getElementById('site-search');
+      if(btn && input){
+        btn.addEventListener('click', function(){ const termo = input.value.trim(); if(termo) window.location.href = 'busca.html?q=' + encodeURIComponent(termo);});
+        input.addEventListener('keypress', function(e){ if(e.key==='Enter'){ e.preventDefault(); btn.click(); }});
+      }
+    })();
+  </script>
+</body>
+</html>
